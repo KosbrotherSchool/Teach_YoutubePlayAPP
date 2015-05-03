@@ -6,21 +6,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
+/**
+ * Created by kolichung on 5/1/15.
+ */
 
 
-public class MainActivity extends Activity {
+public class VideoActivity extends Activity {
 
-    ArrayList<YoutubeVideo> myVideos = new ArrayList<YoutubeVideo>();
-
+    YoutubeVideo mYoutubeVideo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.layout_video);
 
-        myVideos = VideoAPI.getYoutubeVideos("truemovie1",0);
-        new DownloadVideosTask().execute();
+        new DownloadVideoTask().execute();
     }
 
     @Override
@@ -45,31 +45,17 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class DownloadVideosTask extends AsyncTask {
+    private class DownloadVideoTask extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            myVideos = VideoAPI.getYoutubeVideos("truemovie1",1);
+            mYoutubeVideo = VideoAPI.getYoutubeVideoByID("");
             return null;
         }
 
         @Override
         protected void onPostExecute(Object result) {
+
         }
     }
-
-    private class ATask extends AsyncTask{
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
-        }
-    }
-
-
 }

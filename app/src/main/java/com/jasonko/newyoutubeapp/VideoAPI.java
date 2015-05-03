@@ -107,6 +107,28 @@ public class VideoAPI {
 
     }
 
+    public static YoutubeVideo getYoutubeVideoByID(String id){
+        YoutubeVideo theVieo = new YoutubeVideo();
+        String url = "https://gdata.youtube.com/feeds/api/videos/aFK03twjL5g?v=2&alt=json";
+        String message = getMessageFromServer("GET", null, null, url);
+
+        if (message == null) {
+            return null;
+        } else {
+            try {
+                JSONObject object = new JSONObject(message);
+                String description = object.getJSONObject("entry").getJSONObject("media$group").getJSONObject("media$description").getString("$t");
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        return theVieo;
+    }
+
     public static String getMessageFromServer(String requestMethod, String apiPath, JSONObject json, String apiUrl) {
         URL url;
         try {
