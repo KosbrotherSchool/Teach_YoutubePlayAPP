@@ -13,7 +13,6 @@ import android.widget.TextView;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -23,7 +22,6 @@ public class ListVideoAdapter extends BaseAdapter {
     private final Activity   mActivity;
     private final ArrayList<YoutubeVideo> data;
     private static LayoutInflater inflater = null;
-    private static HashMap<String,String> checkMap = new HashMap<String, String>();
 
     public ListVideoAdapter(Activity context, ArrayList<YoutubeVideo> d) {
         mActivity = context;
@@ -101,7 +99,7 @@ public class ListVideoAdapter extends BaseAdapter {
         return ints;
     }
 
-    private String parseVideoLink(String videoUrl) {
+    private String getVideoID(String videoUrl) {
         String id = "";
         if(videoUrl.indexOf("&feature")!= -1){
             id = videoUrl.substring(videoUrl.indexOf("v=")+2, videoUrl.indexOf("&feature"));
@@ -111,7 +109,4 @@ public class ListVideoAdapter extends BaseAdapter {
         return id;
     }
 
-    public static HashMap<String,String> getMap(){
-        return checkMap;
-    }
 }
