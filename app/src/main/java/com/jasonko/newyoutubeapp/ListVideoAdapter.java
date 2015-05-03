@@ -10,8 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jasonko.imageloader.ImageLoader;
-
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,14 +23,12 @@ public class ListVideoAdapter extends BaseAdapter {
     private final Activity   mActivity;
     private final ArrayList<YoutubeVideo> data;
     private static LayoutInflater inflater = null;
-    public ImageLoader imageLoader;
     private static HashMap<String,String> checkMap = new HashMap<String, String>();
 
     public ListVideoAdapter(Activity context, ArrayList<YoutubeVideo> d) {
         mActivity = context;
         data = d;
         inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        imageLoader = new ImageLoader(mActivity.getApplicationContext(), 70);
     }
 
     public int getCount() {
@@ -58,11 +54,7 @@ public class ListVideoAdapter extends BaseAdapter {
         TextView textViews = (TextView) vi.findViewById(R.id.text_list_views);
         TextView textDuration = (TextView) vi.findViewById(R.id.text_list_duration);
         TextView textLikes = (TextView) vi.findViewById(R.id.text_list_like);
-        TextView textId = (TextView) vi.findViewById(R.id.text_id);
 
-        // set id
-        String mId = parseVideoLink(data.get(position).getLink());
-        textId.setText(mId);
 
         // set title text
         textTitle.setText(data.get(position).getTitle());
@@ -92,9 +84,6 @@ public class ListVideoAdapter extends BaseAdapter {
             }
             textDuration.setText(mActivity.getResources().getString(R.string.time)+":"+Integer.toString(intTime[1])+":"+timeSecond);
         }
-
-        // set image
-        imageLoader.DisplayImage(data.get(position).getThumbnail(), image);
 
         return vi;
     }
