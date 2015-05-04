@@ -11,17 +11,18 @@ public class YoutubeVideo {
     String title;
     String link;
     String thumbnail;
-    Date   uploadTime;
-    int    viewCount;
-    int    duration;
-    int    likes;
-    int    dislikes;
+    Date uploadTime;
+    int viewCount;
+    int duration;
+    int likes;
+    int dislikes;
+    String description;
 
     public YoutubeVideo() {
-        this("", "", "", new Date(), 0, 0, 0, 0);
+        this("", "", "", new Date(), 0, 0, 0, 0, "");
     }
 
-    public YoutubeVideo(String title, String link, String thumbnail, Date uploadTime, int viewCount, int duration, int likes, int dislikes) {
+    public YoutubeVideo(String title, String link, String thumbnail, Date uploadTime, int viewCount, int duration, int likes, int dislikes, String description) {
         this.title = title;
         this.link = link;
         this.thumbnail = thumbnail;
@@ -30,6 +31,7 @@ public class YoutubeVideo {
         this.dislikes = dislikes;
         this.likes = likes;
         this.duration = duration;
+        this.description = description;
     }
 
     public String getTitle() {
@@ -62,6 +64,10 @@ public class YoutubeVideo {
 
     public int getDuration() {
         return duration;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
 }

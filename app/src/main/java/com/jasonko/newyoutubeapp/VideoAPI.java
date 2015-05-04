@@ -94,7 +94,7 @@ public class VideoAPI {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    YoutubeVideo video = new YoutubeVideo(title, link, thumbnail, uploadTime, viewCount, duration, likes, dislikes);
+                    YoutubeVideo video = new YoutubeVideo(title, link, thumbnail, uploadTime, viewCount, duration, likes, dislikes,"");
                     videos.add(video);
                 }
 
@@ -109,7 +109,7 @@ public class VideoAPI {
 
     public static YoutubeVideo getYoutubeVideoByID(String id){
         YoutubeVideo theVieo = new YoutubeVideo();
-        String url = "https://gdata.youtube.com/feeds/api/videos/aFK03twjL5g?v=2&alt=json";
+        String url = "https://gdata.youtube.com/feeds/api/videos/"+id+"?v=2&alt=json";
         String message = getMessageFromServer("GET", null, null, url);
 
         if (message == null) {
@@ -118,7 +118,14 @@ public class VideoAPI {
             try {
                 JSONObject object = new JSONObject(message);
                 String description = object.getJSONObject("entry").getJSONObject("media$group").getJSONObject("media$description").getString("$t");
+                String title = object.getJSONObject("entry").getJSONObject("title").getString("$t");
+                String pic = object.getJSONObject("entry").getJSONObject("media$group").getJSONArray("media$thumbnail").getJSONObject(2).getString("url");
+                String videoLink = object.getJSONObject("entry").getJSONArray("link").getJSONObject(0).getString("href");
 
+                theVieo.description = description;
+                theVieo.title = title;
+                theVieo.thumbnail = pic;
+                theVieo.link = videoLink;
 
             } catch (JSONException e) {
                 e.printStackTrace();

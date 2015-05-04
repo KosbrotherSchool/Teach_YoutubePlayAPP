@@ -46,7 +46,7 @@ public class ListVideoAdapter extends BaseAdapter {
         if (convertView == null)
             vi = inflater.inflate(R.layout.item_video_list, null);
 
-        TextView textTitle = (TextView) vi.findViewById(R.id.text_news_list);
+        TextView textTitle = (TextView) vi.findViewById(R.id.text_title_list);
         ImageView image = (ImageView) vi.findViewById(R.id.image_news_list);
         TextView textDate = (TextView) vi.findViewById(R.id.text_list_date);
         TextView textViews = (TextView) vi.findViewById(R.id.text_list_views);
